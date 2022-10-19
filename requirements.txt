@@ -1,0 +1,7 @@
+Flask~=2.2.2
+
+base58~=2.1.1
+cryptography~=38.0.1
+solana~=0.27.2
+Metaplex~=1.1.0
+construct~=2.10.67
