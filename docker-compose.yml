@@ -31,9 +31,6 @@ services:
     networks:
       dev-network:
         ipv4_address: 172.18.0.31
-    volumes:
-      - /local-data/:/data
-      - redis/redis-stack:latest
     restart: always
 
 
