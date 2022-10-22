@@ -9,10 +9,7 @@ def execute(api_endpoint, tx, signers, max_retries=3, skip_confirmation=True, ma
             finalized=True):
     client = Client(api_endpoint)
 
-
     signers = list(map(Keypair, set(map(lambda s: s.seed, signers))))
-
-
     for attempt in range(max_retries):
         try:
             result = client.send_transaction(tx, *signers, opts=TxOpts(skip_preflight=True))

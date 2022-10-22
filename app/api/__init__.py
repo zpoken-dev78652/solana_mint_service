@@ -6,4 +6,3 @@ api_bp = Blueprint('api_bp', __name__,
                    static_url_path='assets')
 
 from app.api.routes import *
-from app.api.tasks import *

@@ -7,6 +7,7 @@ from utils.solana_driver import MetaplexAPI
 from utils.chronicle_driver import ChronicleDriver
 # from flask_sqlalchemy import SQLAlchemy
 import redis
+from solana.rpc.api import Client
 
 
 from config import Config
@@ -17,13 +18,15 @@ app.config.from_object(Config)
 cors = CORS(app)
 metaplex_api = MetaplexAPI(json_key_path=Config.PRIVATE_KEY_PATH, api_endpoint=Config.SOLANA_API_ENDPOINT)
 
+solana_client = Client(Config.SOLANA_API_ENDPOINT)
+
 redis_client = redis.Redis(
     host=Config.REDIS_HOST,
     port=Config.REDIS_PORT,
     db=Config.REDIS_DB
 )
 
-chronicle_driver = ChronicleDriver(base_url=Config.CHRONICLE_BASE_URL, )
+chronicle_driver = ChronicleDriver(base_url=Config.CHRONICLE_BASE_URL, api_key=Config.CHRONICLE_API_KEY)
 # db = SQLAlchemy(app=app)
 
 root = logging.getLogger()
@@ -38,6 +41,6 @@ root.addHandler(handler)
 
 from app.api import api_bp as api_bp_v1
 
-app.register_blueprint(api_bp_v1, url_prefix='/api/v1')
+app.register_blueprint(api_bp_v1, url_prefix='/')
 
 # from app import errors

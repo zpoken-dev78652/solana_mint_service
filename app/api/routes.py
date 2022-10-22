@@ -13,7 +13,7 @@ def get_contract_status():
 @api_bp.route('/nft/contract/mint/token', methods=['POST'])
 def mint_new_token():
     data = request.json
-    ...
+    return token_service.mint_new_token(data=data)
 
 
 @api_bp.route('/nft/contract/token/<id>', methods=['GET'])

@@ -23,11 +23,5 @@ class ChronicleDriver:
             "tokenId": token_id
         }
 
-        retry = 0
         res = requests.post(url=url, headers=headers, json=body)
-        while not res.ok and retry < 20:
-            time.sleep(5)
-            retry += 1
-            res = requests.post(url=url, headers=headers, json=body)
-
-        return res.ok
+        return res
