@@ -29,6 +29,8 @@ services:
     environment:
       ENVIRONMENT: dev
       LISTEN_PORT: 5000
+    env_file:
+      - ./env.txt
     container_name:
       dev-solana-poller
     command: python3 mint_queue_poll.py
