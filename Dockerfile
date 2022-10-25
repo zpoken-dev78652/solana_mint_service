@@ -16,4 +16,3 @@ ENV FLASK_APP app.py
 
 EXPOSE $LISTEN_PORT
 
-ENTRYPOINT gunicorn -b 0.0.0.0:${LISTEN_PORT} -w 2 --access-logfile - --error-logfile - main:app

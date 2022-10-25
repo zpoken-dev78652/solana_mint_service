@@ -1,25 +1,43 @@
 version: '3.3'
 
 services:
-#  dev-mint-service:
-#    build: ./
-#    image:
-#      solana-mint
-#    environment:
-#      ENVIRONMENT: dev
-#      LISTEN_PORT: 5000
-#    env_file:
-#      - ./env.txt
-#    container_name:
-#      dev-solana-mint
-#    ports:
-#      - "6090:5000"
-#    networks:
-#      dev-network:
-#        ipv4_address: 172.18.0.30
-#    volumes:
-#      - ./:/usr/src/app
-#    restart: always
+  dev-mint-service:
+    build: ./
+    image:
+      solana-mint
+    environment:
+      ENVIRONMENT: dev
+      LISTEN_PORT: 5000
+    env_file:
+      - ./env.txt
+    container_name:
+      dev-solana-mint
+    ports:
+      - "6090:5000"
+    command: gunicorn -b 0.0.0.0:5000 -w 2 --access-logfile - --error-logfile - main:app
+    networks:
+      dev-network:
+        ipv4_address: 172.18.0.30
+    volumes:
+      - ./:/usr/src/app
+    restart: always
+
+  dev-mint-poller:
+    build: ./
+    image:
+      solana-mint-poller
+    environment:
+      ENVIRONMENT: dev
+      LISTEN_PORT: 5000
+    container_name:
+      dev-solana-poller
+    command: python3 mint_queue_poll.py
+    networks:
+      dev-network:
+        ipv4_address: 172.18.0.31
+    volumes:
+      - ./:/usr/src/app
+    restart: always
 
   dev-mint-redis:
     image:
@@ -27,7 +45,7 @@ services:
     container_name:
       dev-mint-redis
     ports:
-      - "6379:6379"
+      - "6389:6379"
     networks:
       dev-network:
         ipv4_address: 172.18.0.31
