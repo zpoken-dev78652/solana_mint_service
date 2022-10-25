@@ -2,7 +2,6 @@ import logging
 import sys
 
 from flask import Flask
-from flask_cors import CORS
 from utils.solana_driver import MetaplexAPI
 from utils.chronicle_driver import ChronicleDriver
 # from flask_sqlalchemy import SQLAlchemy
@@ -15,7 +14,6 @@ from config import Config
 app = Flask(__name__, static_url_path='/static')
 app.config.from_object(Config)
 
-cors = CORS(app)
 metaplex_api = MetaplexAPI(json_key_path=Config.PRIVATE_KEY_PATH, api_endpoint=Config.SOLANA_API_ENDPOINT)
 
 solana_client = Client(Config.SOLANA_API_ENDPOINT)

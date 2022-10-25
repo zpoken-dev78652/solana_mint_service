@@ -5,3 +5,5 @@ cryptography~=38.0.1
 solana~=0.18.1
 Metaplex~=1.1.0
 construct~=2.10.67
+redis~=4.3.4
+requests~=2.28.1
